@@ -1,0 +1,2026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#100520">
+
+<!-- WhatsApp & Social Link Preview -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Happy Birthday Nishi! 🎂✨">
+<meta property="og:description" content="4 Chapters, 84 Memories — Cousins by relation, Brother, Sister & Best Friends by heart. Tap to play with music!">
+<meta property="og:image" content="WhatsApp Image 2026-11-27 at 12.27.45 AM (2).jpeg">
+
+<title>Happy Birthday Nishi 🎂✨</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #f5c842;
+    --champagne: #ffe8a3;
+    --rose: #f28bbf;
+    --deep: #0d0318;
+    --purple: #2d0a4e;
+    --lavender: #ce93d8;
+    --bg-a: #2d0a4e;
+    --bg-b: #080010;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bot: env(safe-area-inset-bottom, 0px);
+  }
+
+  html, body {
+    width: 100%; height: 100%; height: 100dvh;
+    overflow: hidden;
+    background: var(--deep);
+    color: #fff;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+
+  /* ─── AMBIENT DYNAMIC BACKDROP & CANVAS ─── */
+  #ambient-backdrop {
+    position: fixed; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse at 50% 45%, var(--bg-a) 0%, var(--bg-b) 100%);
+    transition: background 1.8s ease;
+    pointer-events: none;
+  }
+  #bg-canvas {
+    position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  }
+
+  /* ─── INTRO SCREEN ─── */
+  #intro {
+    position: fixed; inset: 0; z-index: 120;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background: radial-gradient(ellipse at 50% 55%, #340e5c 0%, #090112 100%);
+    transition: opacity .85s ease, transform .85s ease;
+    padding: max(1rem, var(--safe-top)) 1.15rem max(1.2rem, var(--safe-bot));
+    text-align: center;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  #intro.fade-out { opacity: 0; transform: scale(1.04); pointer-events: none; }
+
+  .intro-inner {
+    margin: auto;
+    width: 100%; max-width: 560px;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .hearts-row {
+    display: flex; gap: .8rem; margin-bottom: clamp(.6rem, 2vh, 1rem);
+    opacity: 0; animation: fade-up .9s .2s forwards;
+  }
+  .heart-icon { font-size: clamp(1.5rem, 5vw, 2.2rem); animation: bounce-heart 1.6s ease-in-out infinite; }
+  .heart-icon:nth-child(2){ animation-delay: .22s; }
+  .heart-icon:nth-child(3){ animation-delay: .44s; }
+
+  .intro-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2.15rem, 10.5vw, 5.2rem);
+    color: var(--gold);
+    text-shadow: 0 0 35px rgba(245,200,66,.75), 0 0 70px rgba(245,200,66,.35);
+    animation: pulse-glow 2.4s ease-in-out infinite;
+    line-height: 1.12;
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+  .intro-sub {
+    font-size: clamp(.72rem, 2.6vw, 1.05rem);
+    color: var(--lavender);
+    margin-top: .55rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    opacity: 0; animation: fade-up .9s .45s forwards;
+    max-width: 100%;
+    line-height: 1.4;
+  }
+  .bond-pill {
+    margin-top: .85rem;
+    padding: .48rem 1rem;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(242,139,191,.34);
+    border-radius: 20px;
+    font-size: clamp(.7rem, 2.5vw, .85rem);
+    color: #ffd9ec;
+    opacity: 0; animation: fade-up .9s .65s forwards;
+    backdrop-filter: blur(8px);
+    max-width: 100%;
+    line-height: 1.38;
+  }
+  .song-badge {
+    display: inline-flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: .4rem;
+    background: rgba(245,200,66,.12);
+    border: 1px solid rgba(245,200,66,.35);
+    border-radius: 20px;
+    padding: .42rem .95rem;
+    font-size: clamp(.68rem, 2.4vw, .82rem);
+    color: var(--champagne);
+    margin-top: .65rem;
+    opacity: 0; animation: fade-up .9s .85s forwards;
+    max-width: 100%;
+    line-height: 1.35;
+  }
+  .note-pulse { display: inline-block; animation: bounce-heart 1.5s ease-in-out infinite; }
+
+  .intro-actions {
+    display: flex; flex-direction: column; align-items: center; gap: .7rem;
+    margin-top: clamp(1.1rem, 3.2vh, 1.6rem);
+    opacity: 0; animation: fade-up .9s 1.05s forwards;
+    width: 100%;
+  }
+  .intro-btn {
+    padding: .9rem 2.2rem;
+    background: linear-gradient(135deg, var(--gold), #e89b1e);
+    border: none; border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(.92rem, 3.6vw, 1.08rem);
+    font-weight: 600;
+    color: #1a0a2e;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(245,200,66,.48);
+    transition: transform .2s, box-shadow .2s;
+    max-width: 90vw;
+  }
+  .intro-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 34px rgba(245,200,66,.65); }
+  .intro-btn:active { transform: scale(0.96); }
+
+  .intro-secondary-row {
+    display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .5rem;
+    max-width: 92vw;
+  }
+  .intro-ghost-btn {
+    padding: .48rem 1.05rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,.22);
+    background: rgba(255,255,255,.07);
+    backdrop-filter: blur(8px);
+    color: #f8e8ff;
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(.72rem, 2.5vw, .82rem);
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color .2s, background .2s, transform .15s;
+  }
+  .intro-ghost-btn:hover { border-color: var(--gold); background: rgba(245,200,66,.12); }
+  .intro-ghost-btn:active { transform: scale(.96); }
+
+  .intro-tip {
+    font-size: clamp(.68rem, 2.3vw, .78rem);
+    color: rgba(255,255,255,.65);
+    letter-spacing: .03em;
+  }
+
+  /* ─── TOP PLAYER HUD ─── */
+  #hud {
+    position: fixed;
+    top: max(.5rem, var(--safe-top));
+    left: 0; right: 0;
+    z-index: 65;
+    display: flex; flex-direction: column; align-items: center; gap: .38rem;
+    padding: 0 .6rem;
+    opacity: 0; pointer-events: none;
+    transition: opacity .5s ease;
+  }
+  #hud.visible { opacity: 1; pointer-events: all; }
+
+  .hud-row {
+    width: 100%; max-width: 720px;
+    display: flex; align-items: center; justify-content: space-between; gap: .38rem;
+  }
+  .chapter-pills {
+    flex: 1 1 auto; min-width: 0;
+    display: flex; align-items: center; gap: .24rem;
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .chapter-pills::-webkit-scrollbar { display: none; }
+  .ch-pill {
+    border: 1px solid rgba(255,255,255,.16);
+    background: rgba(12,4,24,.6);
+    backdrop-filter: blur(8px);
+    color: rgba(255,255,255,.76);
+    font-size: clamp(.58rem, 2.15vw, .72rem);
+    font-weight: 500;
+    padding: .24rem .52rem;
+    border-radius: 50px;
+    white-space: nowrap;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all .25s ease;
+  }
+  .ch-pill.active {
+    background: rgba(245,200,66,.22);
+    border-color: rgba(245,200,66,.75);
+    color: var(--gold);
+    box-shadow: 0 0 12px rgba(245,200,66,.25);
+  }
+
+  .hud-controls {
+    display: flex; align-items: center; gap: .28rem; flex-shrink: 0;
+  }
+  .hud-btn {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.18);
+    background: rgba(12,4,24,.62);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    font-size: .76rem;
+    display: inline-flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: transform .15s, border-color .2s;
+  }
+  .hud-btn:active { transform: scale(0.92); }
+  .hud-btn:hover { border-color: var(--gold); }
+
+  .eq-bars {
+    display: inline-flex; align-items: flex-end; gap: 2px; height: 14px;
+    padding: 0 2px;
+  }
+  .eq-bar {
+    width: 2.5px; height: 4px; border-radius: 2px;
+    background: linear-gradient(to top, var(--rose), var(--gold));
+    transition: height .08s ease;
+  }
+
+  /* ─── LYRICS OVERLAY ─── */
+  #lyrics-overlay {
+    width: 100%; max-width: 650px;
+    text-align: center;
+    pointer-events: none;
+    min-height: 2.2rem;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 .3rem;
+  }
+  .lyric-line {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.06rem, 4.2vw, 1.65rem);
+    color: #fff;
+    text-shadow: 0 2px 12px rgba(0,0,0,1), 0 0 22px rgba(245,200,66,.55);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity .35s ease, transform .35s ease;
+    line-height: 1.24;
+    padding: .12rem .55rem;
+    border-radius: 12px;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    background: radial-gradient(ellipse at center, rgba(10,2,20,.45), transparent 80%);
+  }
+  .lyric-line.active { opacity: 1; transform: translateY(0); }
+
+  /* ─── SLIDESHOW STAGE ─── */
+  #slideshow {
+    position: fixed; inset: 0; z-index: 15;
+    overflow: hidden;
+    opacity: 0; pointer-events: none;
+    transition: opacity .8s ease;
+  }
+  #slideshow.active { opacity: 1; pointer-events: all; }
+
+  .slide {
+    position: absolute; inset: 0;
+    width: 100%; height: 100dvh;
+    opacity: 0;
+    transition: opacity .55s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    will-change: opacity;
+  }
+  .slide.active { opacity: 1; pointer-events: all; }
+
+  /* Chapter Interstitial Card */
+  .chapter-card {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    background: radial-gradient(circle at center, rgba(255,255,255,.04) 0%, transparent 70%);
+  }
+  .ch-num {
+    font-size: clamp(.74rem, 2.5vw, .88rem);
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(245,200,66,.4);
+    padding: .3rem 1rem;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+    opacity: 0; transform: translateY(14px);
+    transition: all .7s .15s ease;
+  }
+  .ch-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2rem, 9vw, 4.2rem);
+    background: linear-gradient(135deg, #fff, var(--champagne), var(--rose));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    line-height: 1.18;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    opacity: 0; transform: translateY(18px);
+    transition: all .8s .3s ease;
+    text-shadow: none;
+  }
+  .ch-desc {
+    margin-top: .75rem;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(.9rem, 3.2vw, 1.2rem);
+    color: rgba(255,255,255,.82);
+    max-width: 480px;
+    opacity: 0; transform: translateY(16px);
+    transition: all .8s .45s ease;
+  }
+  .slide.active .ch-num,
+  .slide.active .ch-title,
+  .slide.active .ch-desc {
+    opacity: 1; transform: translateY(0);
+  }
+
+  /* Photo Slides — Dynamic Flexbox Column (zero clipping on any phone/desktop) */
+  .photo-wrap {
+    position: absolute; inset: 0;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: space-between;
+    padding: var(--hud-h, 114px) .7rem max(.55rem, calc(var(--safe-bot) + .45rem));
+  }
+  .photo-bg {
+    position: absolute; inset: -30px;
+    width: calc(100% + 60px); height: calc(100% + 60px);
+    object-fit: cover;
+    filter: blur(28px) brightness(0.32) saturate(1.35);
+    transform: scale(1.1);
+    pointer-events: none;
+  }
+  .photo-slot {
+    position: relative; z-index: 2;
+    flex: 1 1 0; min-height: 0; width: 100%;
+    display: flex; align-items: center; justify-content: center;
+    padding: 4px;
+  }
+  .photo-frame {
+    position: relative;
+    display: inline-flex; align-items: center; justify-content: center;
+    max-width: 95%;
+    max-height: 95%;
+    border-radius: 14px;
+    padding: 3.5px;
+    background: linear-gradient(135deg, rgba(245,200,66,.48), rgba(242,139,191,.3), rgba(245,200,66,.2));
+    box-shadow: 0 16px 46px rgba(0,0,0,.68), 0 0 26px rgba(245,200,66,.18);
+    will-change: transform;
+  }
+  .photo-main {
+    display: block;
+    max-width: calc(92vw - 16px);
+    max-height: var(--slot-max-h, calc(100dvh - 220px));
+    width: auto; height: auto;
+    object-fit: contain;
+    border-radius: 11px;
+  }
+  .photo-overlay {
+    position: absolute; inset: 0; z-index: 3; pointer-events: none;
+    background:
+      linear-gradient(to top, rgba(8,0,18,.88) 0%, transparent 28%),
+      linear-gradient(to bottom, rgba(8,0,18,.68) 0%, transparent 24%);
+  }
+
+  /* Gentle breathing motion on .photo-frame so 100% of every photo stays uncropped */
+  .slide.active .photo-frame.kb-0 { animation: kb-zoom-in var(--hold-dur, 2500ms) ease-out forwards; }
+  .slide.active .photo-frame.kb-1 { animation: kb-zoom-out var(--hold-dur, 2500ms) ease-out forwards; }
+  .slide.active .photo-frame.kb-2 { animation: kb-pan-left var(--hold-dur, 2500ms) ease-out forwards; }
+  .slide.active .photo-frame.kb-3 { animation: kb-pan-right var(--hold-dur, 2500ms) ease-out forwards; }
+
+  .photo-bottom {
+    position: relative; z-index: 4; pointer-events: none;
+    flex: 0 0 auto; width: 100%; max-width: 680px;
+    display: flex; flex-direction: column; gap: .22rem;
+    padding: .25rem .4rem .15rem;
+  }
+  .photo-caption {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.12rem, 4.4vw, 1.9rem);
+    line-height: 1.2;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 2px 14px rgba(0,0,0,1), 0 0 22px rgba(245,200,66,.65);
+    opacity: 0; transform: translateY(8px);
+    transition: opacity .5s .15s ease, transform .5s .15s ease;
+  }
+  .slide.active .photo-caption { opacity: 1; transform: translateY(0); }
+
+  .slide-meta {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: clamp(.6rem, 2.2vw, .74rem);
+    color: rgba(255,255,255,.58);
+    letter-spacing: .08em;
+    padding: 0 .25rem;
+  }
+  .slide-spotlight-tag {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  /* Toast indicator for tap/pause */
+  #toast {
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(.9);
+    z-index: 80; pointer-events: none;
+    padding: .55rem 1.2rem;
+    border-radius: 50px;
+    background: rgba(12,4,24,.78);
+    border: 1px solid rgba(245,200,66,.45);
+    color: var(--champagne);
+    font-size: .85rem;
+    opacity: 0;
+    transition: opacity .25s ease, transform .25s ease;
+    backdrop-filter: blur(8px);
+  }
+  #toast.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
+  /* ─── PROGRESS BAR ─── */
+  #progress-bar-wrap {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    height: 4px; background: rgba(255,255,255,.1); z-index: 70;
+    display: none;
+  }
+  #progress-bar {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, var(--rose), var(--gold), #fff);
+    box-shadow: 0 0 10px rgba(245,200,66,.85);
+    transition: width .25s linear;
+  }
+
+  /* ─── INTERACTIVE BIRTHDAY CAKE SCREEN ─── */
+  #cake-screen {
+    position: fixed; inset: 0; z-index: 95;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: radial-gradient(ellipse at center, #320b56 0%, #090013 100%);
+    opacity: 0; pointer-events: none;
+    transition: opacity 1s ease;
+    padding: max(1rem, var(--safe-top)) 1.2rem max(1.2rem, var(--safe-bot));
+    text-align: center;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  #cake-screen.active { opacity: 1; pointer-events: all; }
+  .cake-inner {
+    margin: auto;
+    display: flex; flex-direction: column; align-items: center;
+    width: 100%; max-width: 480px;
+  }
+
+  .cake-heading {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2rem, 8vw, 3.6rem);
+    color: var(--gold);
+    text-shadow: 0 0 28px rgba(245,200,66,.65);
+    line-height: 1.15;
+  }
+  .cake-sub {
+    margin-top: .45rem;
+    font-size: clamp(.82rem, 3vw, 1.02rem);
+    color: var(--lavender);
+    max-width: 440px;
+    line-height: 1.45;
+  }
+
+  /* CSS Birthday Cake */
+  .cake-stage {
+    position: relative;
+    margin: clamp(1.3rem, 3.5vh, 2.2rem) 0 clamp(.9rem, 2.4vh, 1.4rem);
+    cursor: pointer;
+    transition: transform .25s ease;
+  }
+  .cake-stage:hover { transform: scale(1.03); }
+  .cake-stage:active { transform: scale(0.97); }
+
+  .candles-row {
+    display: flex; justify-content: center; gap: 18px;
+    margin-bottom: -4px; position: relative; z-index: 3;
+  }
+  .candle {
+    width: 10px; height: 42px;
+    border-radius: 4px 4px 2px 2px;
+    background: repeating-linear-gradient(135deg, #fff 0 6px, #f28bbf 6px 12px);
+    position: relative;
+    box-shadow: 0 2px 6px rgba(0,0,0,.35);
+  }
+  .candle::before {
+    content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%);
+    width: 2px; height: 7px; background: #333;
+  }
+  .flame {
+    position: absolute; top: -24px; left: 50%; transform: translateX(-50%);
+    width: 14px; height: 22px;
+    background: radial-gradient(ellipse at 50% 70%, #fff 10%, #ffea70 45%, #ff8c00 85%, transparent 100%);
+    border-radius: 50% 50% 50% 50% / 65% 65% 35% 35%;
+    box-shadow: 0 0 16px #ffbe3b, 0 0 32px rgba(255,140,0,.7);
+    animation: flicker .45s ease-in-out infinite alternate;
+    transform-origin: bottom center;
+    transition: opacity .35s ease, transform .35s ease;
+  }
+  .candle:nth-child(2) .flame { animation-delay: .12s; }
+  .candle:nth-child(3) .flame { animation-delay: .25s; }
+  .candle:nth-child(4) .flame { animation-delay: .08s; }
+  .candle:nth-child(5) .flame { animation-delay: .19s; }
+
+  .cake-stage.blown .flame {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px) scale(0.2);
+  }
+  .smoke {
+    position: absolute; top: -28px; left: 50%; transform: translateX(-50%);
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(255,255,255,.55);
+    opacity: 0; pointer-events: none;
+  }
+  .cake-stage.blown .smoke {
+    animation: rise-smoke 1.2s ease-out forwards;
+  }
+
+  .cake-tier-top {
+    width: 168px; height: 48px; margin: 0 auto;
+    background: linear-gradient(180deg, #ff9ecd, #e85d9c);
+    border-radius: 14px 14px 6px 6px;
+    position: relative; z-index: 2;
+    box-shadow: inset 0 6px 0 rgba(255,255,255,.35), 0 6px 14px rgba(0,0,0,.3);
+  }
+  .cake-icing {
+    position: absolute; top: 0; left: 0; right: 0; height: 18px;
+    background: #fff4fa;
+    border-radius: 14px 14px 10px 10px;
+  }
+  .cake-tier-bot {
+    width: 224px; height: 64px; margin: -4px auto 0;
+    background: linear-gradient(180deg, #f5c842, #d49118);
+    border-radius: 14px 14px 12px 12px;
+    position: relative; z-index: 1;
+    box-shadow: inset 0 6px 0 rgba(255,255,255,.3), 0 12px 24px rgba(0,0,0,.45);
+  }
+  .cake-tier-bot::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 16px;
+    background: #fff9e6; border-radius: 14px 14px 8px 8px;
+  }
+  .cake-plate {
+    width: 264px; height: 14px; margin: 2px auto 0;
+    background: linear-gradient(90deg, #b894d6, #fff, #b894d6);
+    border-radius: 50%;
+    box-shadow: 0 8px 25px rgba(0,0,0,.6);
+  }
+
+  .blow-btn {
+    margin-top: .8rem;
+    padding: .85rem 2rem;
+    border: none; border-radius: 50px;
+    background: linear-gradient(135deg, var(--gold), #e59217);
+    color: #1a0a2e;
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(.9rem, 3.2vw, 1.02rem);
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 26px rgba(245,200,66,.45);
+    transition: transform .2s;
+  }
+  .blow-btn:active { transform: scale(.96); }
+
+  /* ─── FINAL MESSAGE SCREEN ─── */
+  #final-screen {
+    position: fixed; inset: 0; z-index: 90;
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+    background: radial-gradient(ellipse at center, #2f0b52 0%, #090013 100%);
+    opacity: 0; pointer-events: none;
+    transition: opacity 1.2s ease;
+    padding: max(1rem, calc(var(--safe-top) + .6rem)) .95rem max(1.4rem, calc(var(--safe-bot) + 1rem));
+    text-align: center;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  #final-screen.active { opacity: 1; pointer-events: all; }
+
+  .final-container {
+    margin: auto;
+    display: flex; flex-direction: column; align-items: center;
+    width: 100%; max-width: 600px;
+  }
+  .final-name {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2.1rem, 8.5vw, 3.4rem);
+    background: linear-gradient(135deg, var(--gold), var(--rose), var(--lavender));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    animation: pulse-glow 2.2s infinite, fade-up .9s .2s both;
+    line-height: 1.2;
+  }
+  .final-subtitle {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: clamp(.78rem, 2.7vw, .98rem); color: var(--lavender);
+    margin: .18rem 0 .7rem;
+    animation: fade-up .9s .4s both;
+    padding: 0 .4rem;
+  }
+  .final-message {
+    width: 100%; max-width: 560px;
+    font-size: clamp(.82rem, 3.1vw, .95rem);
+    color: rgba(255,255,255,.94);
+    line-height: 1.56;
+    animation: fade-up .9s .6s both;
+    background: rgba(255,255,255,.06);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(245,200,66,.26);
+    border-radius: 16px;
+    padding: clamp(.85rem, 2.4vw, 1.25rem) clamp(1rem, 3.5vw, 1.5rem);
+    text-align: left;
+    position: relative;
+    box-shadow: 0 14px 40px rgba(0,0,0,.45);
+  }
+  .final-message::before {
+    content: '“'; position: absolute; top: -.45rem; left: .8rem;
+    font-family: 'Playfair Display', serif; font-size: 2.5rem;
+    color: var(--gold); opacity: .28; line-height: 1;
+  }
+  .final-message p + p { margin-top: .58rem; }
+
+  .signature {
+    margin-top: .75rem;
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.2rem, 4.5vw, 1.55rem);
+    color: var(--gold);
+    animation: fade-up .9s .85s both;
+  }
+  .final-actions {
+    margin-top: .85rem;
+    display: flex; flex-wrap: wrap; justify-content: center; gap: .55rem;
+    animation: fade-up .9s 1.05s both;
+    padding-bottom: .35rem;
+  }
+  .action-btn {
+    padding: .55rem 1.2rem;
+    border: none; border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(.76rem, 2.8vw, .86rem);
+    font-weight: 600; cursor: pointer;
+    transition: transform .18s, box-shadow .18s;
+  }
+  .action-btn:active { transform: scale(.95); }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--rose), #c2185b);
+    color: #fff; box-shadow: 0 6px 20px rgba(242,139,191,.42);
+  }
+  .btn-secondary {
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(245,200,66,.4);
+    color: var(--champagne);
+  }
+
+  /* ─── GALLERY MODAL (ALL 84 MEMORIES) ─── */
+  #gallery-modal {
+    position: fixed; inset: 0; z-index: 140;
+    background: rgba(8,2,18,.95);
+    backdrop-filter: blur(14px);
+    display: none; flex-direction: column;
+    padding: max(.8rem, var(--safe-top)) .9rem max(.9rem, var(--safe-bot));
+  }
+  #gallery-modal.open { display: flex; }
+  .gallery-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: .7rem; border-bottom: 1px solid rgba(255,255,255,.12);
+    margin-bottom: .8rem;
+  }
+  .gallery-header h3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.65rem; color: var(--gold);
+  }
+  .gallery-close {
+    background: rgba(255,255,255,.12); color: #fff;
+    border: none; border-radius: 50%; width: 34px; height: 34px;
+    font-size: 1rem; cursor: pointer;
+  }
+  .gallery-grid {
+    flex: 1; overflow-y: auto;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
+    gap: 8px; padding-bottom: 1rem;
+  }
+  .gal-item {
+    position: relative; aspect-ratio: 3/4; border-radius: 10px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,.14); cursor: pointer;
+    background: #170826;
+  }
+  .gal-item img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform .25s ease;
+  }
+  .gal-item:hover img { transform: scale(1.06); }
+  .gal-cap {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 18px 6px 5px;
+    background: linear-gradient(to top, rgba(0,0,0,.85), transparent);
+    font-size: .62rem; color: #fff; text-align: center;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  /* ─── PETALS ─── */
+  .petal {
+    position: fixed; pointer-events: none; z-index: 6; animation: fall linear forwards;
+  }
+
+  /* ─── KEYFRAMES ─── */
+  @keyframes pulse-glow {
+    0%,100%{ text-shadow:0 0 20px rgba(245,200,66,.75),0 0 55px rgba(245,200,66,.35); }
+    50%    { text-shadow:0 0 38px rgba(245,200,66,1),0 0 90px rgba(245,200,66,.55),0 0 120px rgba(242,139,191,.3); }
+  }
+  @keyframes fade-up {
+    from{ opacity:0; transform:translateY(22px); }
+    to  { opacity:1; transform:translateY(0); }
+  }
+  @keyframes bounce-heart {
+    0%,100%{ transform:translateY(0) scale(1); }
+    50%    { transform:translateY(-8px) scale(1.16); }
+  }
+  @keyframes kb-zoom-in {
+    0%   { transform: scale(1); }
+    100% { transform: scale(1.03); }
+  }
+  @keyframes kb-zoom-out {
+    0%   { transform: scale(1.03); }
+    100% { transform: scale(1); }
+  }
+  @keyframes kb-pan-left {
+    0%   { transform: scale(1.02) translateX(0.8%); }
+    100% { transform: scale(1.02) translateX(-0.8%); }
+  }
+  @keyframes kb-pan-right {
+    0%   { transform: scale(1.02) translateX(-0.8%); }
+    100% { transform: scale(1.02) translateX(0.8%); }
+  }
+  @keyframes fall {
+    0%  { transform:translateY(-8vh) translateX(0) rotate(0deg); opacity:1; }
+    100%{ transform:translateY(108vh) translateX(48px) rotate(560deg); opacity:.18; }
+  }
+  @keyframes flicker {
+    0%   { transform: translateX(-50%) scale(1) rotate(-2deg); }
+    100% { transform: translateX(-50%) scale(1.08, 0.94) rotate(2deg); }
+  }
+  @keyframes rise-smoke {
+    0%   { opacity: .75; transform: translateX(-50%) translateY(0) scale(.8); }
+    100% { opacity: 0; transform: translateX(-40%) translateY(-42px) scale(2.8); }
+  }
+</style>
+</head>
+<body>
+
+<div id="ambient-backdrop"></div>
+<canvas id="bg-canvas"></canvas>
+
+<!-- Primary Birthday Song + Optional Custom Audio -->
+<audio id="bg-audio" preload="auto" playsinline>
+  <source src="Happy Birthday, Nishi!.mp3" type="audio/mpeg">
+</audio>
+
+<!-- ═══ INTRO SCREEN ═══ -->
+<div id="intro">
+  <div class="intro-inner">
+    <div class="hearts-row">
+      <span class="heart-icon">🌸</span>
+      <span class="heart-icon">💛</span>
+      <span class="heart-icon">🎂</span>
+    </div>
+    <div class="intro-title">Happy Birthday<br>Nishi! ✨</div>
+    <div class="intro-sub">4 Chapters &bull; 84 Memories &bull; Synced to Her Song</div>
+    <div class="bond-pill">Cousins by relation &mdash; Brother, Sister &amp; Best Friends by heart 💛</div>
+    <div class="song-badge" id="song-badge-text">
+      <span class="note-pulse">🎵</span>
+      Original Song &mdash; <em>Happy Birthday, Nishi!</em> (3:22)
+    </div>
+    <div class="intro-actions">
+      <button class="intro-btn" onclick="startShow()">▶ &nbsp;Play Nishi's Birthday Video</button>
+      <div class="intro-secondary-row">
+        <button class="intro-ghost-btn" onclick="openGallery()">📸 &nbsp;Browse All 84 Memories</button>
+      </div>
+      <div class="intro-tip">🔊 Turn up volume &bull; Tap or swipe anytime during playback</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TOP PLAYER HUD & LYRICS ═══ -->
+<div id="hud">
+  <div class="hud-row">
+    <div class="chapter-pills" id="chapter-pills"></div>
+    <div class="hud-controls">
+      <div class="eq-bars" id="eq-bars" aria-hidden="true">
+        <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+      </div>
+      <button class="hud-btn" id="btn-pause" onclick="togglePause()" title="Play / Pause">⏸</button>
+      <button class="hud-btn" id="btn-mute" onclick="toggleMute()" title="Mute / Unmute">🔊</button>
+      <button class="hud-btn" onclick="openGallery()" title="All 84 Memories">🖼️</button>
+    </div>
+  </div>
+  <div id="lyrics-overlay">
+    <div class="lyric-line" id="lyric-display"></div>
+  </div>
+</div>
+
+<!-- ═══ SLIDESHOW ═══ -->
+<div id="slideshow">
+  <div id="slides-container"></div>
+</div>
+
+<!-- ═══ TOAST ─── -->
+<div id="toast"></div>
+
+<!-- ═══ PROGRESS BAR ─── -->
+<div id="progress-bar-wrap"><div id="progress-bar"></div></div>
+
+<!-- ═══ INTERACTIVE CAKE SCREEN ─── -->
+<div id="cake-screen">
+  <div class="cake-inner">
+    <div class="cake-heading">Make a Wish, Nishi! 🎂</div>
+    <div class="cake-sub">Close your eyes, think of your biggest dream for this year, and tap the cake or button to blow out the candles ✨</div>
+
+    <div class="cake-stage" id="cake-stage" onclick="blowCandles()">
+      <div class="candles-row">
+        <div class="candle"><div class="flame"></div><div class="smoke"></div></div>
+        <div class="candle"><div class="flame"></div><div class="smoke"></div></div>
+        <div class="candle"><div class="flame"></div><div class="smoke"></div></div>
+        <div class="candle"><div class="flame"></div><div class="smoke"></div></div>
+        <div class="candle"><div class="flame"></div><div class="smoke"></div></div>
+      </div>
+      <div class="cake-tier-top"><div class="cake-icing"></div></div>
+      <div class="cake-tier-bot"></div>
+      <div class="cake-plate"></div>
+    </div>
+
+    <button class="blow-btn" id="blow-btn" onclick="blowCandles()">🌬️ &nbsp;Blow Out Candles &amp; Open Letter</button>
+  </div>
+</div>
+
+<!-- ═══ FINAL HEARTFELT LETTER ─── -->
+<div id="final-screen">
+  <div class="final-container">
+    <div class="final-name">Nishi ✨</div>
+    <div class="final-subtitle">Cousins by relation — Brother, Sister &amp; Best Friends by heart</div>
+    <div class="final-message">
+      <p>Life put distance between our families — no big shared celebrations, no usual gatherings. Yet somehow, out of all that silence and separation, the two of us built something far more real and priceless than anything formality could ever create.</p>
+      <p>To the world we might just be cousins, but to me you will always be my sister and one of my truest best friends. Every road trip, train ride, silly selfie, and late conversation proved that real family isn't measured by who gathers at the same table — it's measured by who genuinely shows up and stays in your corner.</p>
+      <p>Watching you grow from that tiny fearless kid into the radiant, confident, joyful woman you are today makes me endlessly proud. May every wish you made tonight come true, and may life always treat your pure heart gently. Happy Birthday, Nishi! 🌟</p>
+    </div>
+    <div class="signature">Your brother &amp; best friend, always &nbsp;💛</div>
+    <div class="final-actions">
+      <button class="action-btn btn-primary" onclick="replay()">🔄 &nbsp;Watch Again</button>
+      <button class="action-btn btn-secondary" onclick="openGallery()">📸 &nbsp;All 84 Photos</button>
+      <button class="action-btn btn-secondary" onclick="relightCake()">🕯️ &nbsp;Make Another Wish</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ALL MEMORIES GALLERY MODAL ─── -->
+<div id="gallery-modal">
+  <div class="gallery-header">
+    <h3>Nishi's 84 Memories ✨</h3>
+    <button class="gallery-close" onclick="closeGallery()">✕</button>
+  </div>
+  <div class="gallery-grid" id="gallery-grid"></div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════════
+//  4 STORY CHAPTERS & ALL 84 UNIQUE CURATED PHOTOS
+// ════════════════════════════════════════════════════════
+const CHAPTERS = [
+  {
+    id: 0,
+    pill: "01 Kid",
+    num: "Chapter I",
+    title: "Once Upon a Time",
+    desc: "Little Nishi — tiny shoes, huge personality & the sweetest smile",
+    cardDur: 3500,
+    bgA: "#3b1742", bgB: "#0c0314",
+    photos: [
+      { file:"WhatsApp Image 2026-11-27 at 12.27.52 AM (2).jpeg", caption:"Tiny legend with big shades 😎", dur: 3800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.54 AM (1).jpeg", caption:"Cutest little sunshine 🌻", dur: 3800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.47 AM (2).jpeg", caption:"Innocent eyes, endless curiosity ✨", dur: 3800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.48 AM (1).jpeg", caption:"Always ready for the next adventure 💛", dur: 3800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.51 AM (1).jpeg", caption:"Born to shine on every stage 🎭", dur: 3800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.51 AM.jpeg",     caption:"Little captain in command 🫡", dur: 3800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.46 AM.jpeg",     caption:"Festive princess from day one 🌸", dur: 3800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.54 AM.jpeg",     caption:"Peeking into the best years ahead 👀💫", dur: 3800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.48 AM.jpeg",     caption:"Simple, sweet & full of spark 🧡", dur: 3800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.50 AM (2).jpeg", caption:"That smile never changed 💛", dur: 3800 },
+    ]
+  },
+  {
+    id: 1,
+    pill: "02 Glow",
+    num: "Chapter II",
+    title: "Growing Up Bright",
+    desc: "Carefree days, colorful outfits & stepping into who you are",
+    cardDur: 2800,
+    bgA: "#16244f", bgB: "#060818",
+    photos: [
+      { file:"WhatsApp Image 2026-11-27 at 12.27.46 AM (2).jpeg", caption:"Starlight in her eyes ✨", dur: 1900 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.47 AM (3).jpeg", caption:"Golden light & quiet magic ☀️", dur: 1800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.50 AM.jpeg",     caption:"Her own little world of wonder 🔴✨", dur: 1800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.48 AM (2).jpeg", caption:"Chasing breezes by the bridge 🚲🌊", dur: 1800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.49 AM.jpeg",     caption:"Blooming brighter every season 🌺", dur: 1800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.52 AM (3).jpeg", caption:"Flowers trying to keep up with her 🌸", dur: 1900 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.52 AM.jpeg",     caption:"Three moods, one favorite sister 😄", dur: 1800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.51 AM (3).jpeg", caption:"Mirror moments & goofy smiles 🪞💖", dur: 1800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.53 AM (1).jpeg", caption:"Vibrant inside and out 💗", dur: 1800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.53 AM (2).jpeg", caption:"Princess vibes & flower crowns 👑🌸", dur: 1900 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.48 AM (3).jpeg", caption:"Carefree days & bright colors 🌈", dur: 1800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.46 AM (1).jpeg", caption:"Graceful in every color 🌼", dur: 1800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.47 AM (1).jpeg", caption:"Royal purple magic 💜", dur: 1800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.52 AM (1).jpeg", caption:"Twirling through life with style 💃", dur: 1900 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.53 AM.jpeg",     caption:"Main character energy unlocked 🏎️✨", dur: 1800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.28.01 AM (3).jpeg", caption:"Pop of color, full of life 🎨", dur: 1800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.28.01 AM (2).jpeg", caption:"Shining under evening lights 🌟", dur: 1800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.51 AM (2).jpeg", caption:"Warmest smile on any day ☀️", dur: 1900 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.54 AM (2).jpeg", caption:"Effortlessly sunny 💛", dur: 1800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.50 AM (3).jpeg", caption:"Growing into pure grace 🩵", dur: 1800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.59 AM (2).jpeg", caption:"Cool, calm & confident 🖤", dur: 1800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.59 AM (3).jpeg", caption:"Chillin' like a queen 🪑💫", dur: 1900 },
+    ]
+  },
+  {
+    id: 2,
+    pill: "03 Bond",
+    num: "Chapter III",
+    title: "Brother, Sister & Best Friends",
+    desc: "Family distance couldn't stop us — we chose our own bond",
+    cardDur: 2900,
+    bgA: "#42112a", bgB: "#0f030b",
+    photos: [
+      { file:"WhatsApp Image 2026-11-27 at 12.27.47 AM.jpeg",     caption:"Even back then, we were our own team 💛", dur: 3200, spotlight: true },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.49 AM (2).jpeg", caption:"Miles & train rides, always side by side 🚂", dur: 3200, spotlight: true },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.49 AM (1).jpeg", caption:"Partners in every adventure 🌿🤝", dur: 3200, spotlight: true },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.54 AM (3).jpeg", caption:"Best road-trip & gossip partner 🚗✨", dur: 3200, spotlight: true },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.56 AM (2).jpeg", caption:"Cousins on paper — brother & sister at heart 🖤❤️", dur: 3200, spotlight: true },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.59 AM (1).jpeg", caption:"No matter the distance, we show up for each other ✨", dur: 3200, spotlight: true },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.50 AM (1).jpeg", caption:"True friend energy, always 💜", dur: 2100 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.43 AM (2).jpeg", caption:"Capturing memories on every trip 📸", dur: 2100 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.57 AM (2).jpeg", caption:"Looking ahead to brighter days 🔭💫", dur: 2100 },
+      { file:"WhatsApp Image 2026-11-27 at 12.28.00 AM (1).jpeg", caption:"Competitive arcade streak: ON 🏒🔥", dur: 2100 },
+      { file:"WhatsApp Image 2026-11-27 at 12.28.00 AM.jpeg",     caption:"Mood when the food takes too long 😂", dur: 2100 },
+      { file:"WhatsApp Image 2026-11-27 at 12.28.01 AM (1).jpeg", caption:"Too cool for the camera 🙈✨", dur: 2100 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.40 AM.jpeg",     caption:"Random clicks that always make us smile 😊", dur: 2100 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.41 AM (3).jpeg", caption:"Good times & endless laughs 🖤", dur: 2100 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.45 AM (3).jpeg", caption:"Real friendships, zero filter 💙", dur: 2100 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.43 AM (1).jpeg", caption:"A thousand expressions, all hers 😍", dur: 2100 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.42 AM (3).jpeg", caption:"Golden chaos in one frame 💛", dur: 2000 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.57 AM (1).jpeg", caption:"Sunshine energy everywhere she goes 🌻", dur: 2000 },
+    ]
+  },
+  {
+    id: 3,
+    pill: "04 Queen",
+    num: "Chapter IV",
+    title: "Today's Birthday Queen",
+    desc: "Radiant, unstoppable & celebrating the incredible person you are",
+    cardDur: 2400,
+    bgA: "#2d0a4e", bgB: "#070010",
+    photos: [
+      { file:"WhatsApp Image 2026-11-27 at 12.27.28 AM.jpeg",     caption:"Golden hour glow ✨", dur: 1800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.29 AM (1).jpeg", caption:"Effortlessly chic ☕💫", dur: 1750 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.41 AM (1).jpeg", caption:"Classy & confident every day 💖", dur: 1750 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.42 AM (1).jpeg", caption:"Turning heads without even trying 🔥", dur: 1750 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.42 AM.jpeg",     caption:"Clean aesthetic, pure poise 🤍", dur: 1750 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.43 AM.jpeg",     caption:"Timeless elegance 🖤", dur: 1750 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.44 AM (2).jpeg", caption:"Soft pink grace 🌸", dur: 1750 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.44 AM (3).jpeg", caption:"Boss vibes in a trench coat 🧥✨", dur: 1750 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.45 AM (1).jpeg", caption:"Stunning from head to toe 💜", dur: 1750 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.45 AM.jpeg",     caption:"Every frame is a masterpiece 📸", dur: 1750 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.40 AM (1).jpeg", caption:"Bold, bright & unapologetically you 💗", dur: 1750 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.41 AM.jpeg",     caption:"Ocean breeze & carefree spirit 🌊", dur: 1750 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.42 AM (2).jpeg", caption:"Nature's favorite muse 🌿💚", dur: 1750 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.44 AM.jpeg",     caption:"Walking in sunshine 🩵🌼", dur: 1750 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.55 AM (1).jpeg", caption:"Blossom trails & bright mornings 🌸", dur: 1750 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.55 AM (3).jpeg", caption:"Playful heart, unforgettable charm ❤️", dur: 1750 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.55 AM.jpeg",     caption:"Warm hues & golden moments ✨", dur: 1750 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.56 AM (1).jpeg", caption:"Six frames of pure style 💛", dur: 1750 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.56 AM.jpeg",     caption:"Always lighting up the cafe ❤️", dur: 1750 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.57 AM.jpeg",     caption:"Soft florals & sweeter smiles 🌷", dur: 1750 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.58 AM (1).jpeg", caption:"Sky above, dreams ahead 🌤️", dur: 1750 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.58 AM (2).jpeg", caption:"Candid moments, real joy 🖤", dur: 1750 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.58 AM.jpeg",     caption:"Living life on your own terms ✨", dur: 1750 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.59 AM.jpeg",     caption:"Lavender dreams & effortless cool 💜", dur: 1750 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.29 AM.jpeg",     caption:"Grace in vibrant purple 💜🌿", dur: 1750 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.30 AM (1).jpeg", caption:"Shining like golden sunshine 💛", dur: 1800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.30 AM.jpeg",     caption:"Festive magic under starry lights ✨", dur: 1750 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.40 AM (2).jpeg", caption:"Enjoying every beautiful horizon 🌅", dur: 1800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.55 AM (2).jpeg", caption:"Navratri queen spinning in colors 💃🌈", dur: 1750 },
+      { file:"WhatsApp Image 2026-11-27 at 12.28.00 AM (2).jpeg", caption:"Seated like royalty 💜👑", dur: 1800 },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.41 AM (2).jpeg", caption:"Balloons, wishes & pure celebration 🎈", dur: 3200, spotlight: true },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.44 AM (1).jpeg", caption:"Surrounded by joy & celebration 🎉", dur: 3200, spotlight: true },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.58 AM (3).jpeg", caption:"All love for our favorite soul 💛🤍", dur: 3200, spotlight: true },
+      { file:"WhatsApp Image 2026-11-27 at 12.27.45 AM (2).jpeg", caption:"🎂 Happy Birthday, Nishi — shine like fireworks! 🎆", dur: 4200, spotlight: true },
+    ]
+  }
+];
+
+// Build flat timeline of all chapter cards + 84 photos (200.5s total, locked to song)
+const TIMELINE = [];
+const CHAPTER_START_INDEX = {};
+let globalPhotoNum = 0;
+let cursorMs = 0;
+
+CHAPTERS.forEach((ch) => {
+  CHAPTER_START_INDEX[ch.id] = TIMELINE.length;
+  TIMELINE.push({
+    type: 'chapter',
+    chapterId: ch.id,
+    num: ch.num,
+    title: ch.title,
+    desc: ch.desc,
+    bgA: ch.bgA,
+    bgB: ch.bgB,
+    dur: ch.cardDur,
+    startMs: cursorMs
+  });
+  cursorMs += ch.cardDur;
+
+  ch.photos.forEach((p) => {
+    globalPhotoNum++;
+    const dur = p.dur || 1800;
+    TIMELINE.push({
+      type: 'photo',
+      chapterId: ch.id,
+      photoIdx: globalPhotoNum,
+      file: p.file,
+      caption: p.caption,
+      spotlight: !!p.spotlight,
+      kbClass: 'kb-' + ((globalPhotoNum - 1) % 4),
+      bgA: ch.bgA,
+      bgB: ch.bgB,
+      dur: dur,
+      startMs: cursorMs
+    });
+    cursorMs += dur;
+  });
+});
+
+const TOTAL_DURATION_MS = cursorMs;
+const TOTAL_PHOTOS = globalPhotoNum; // 84
+
+// ════════════════════════════════════════════════════════
+//  SYNCED SONG LYRICS (EXACT TIMESTAMPS FOR "Happy Birthday, Nishi!.mp3")
+// ════════════════════════════════════════════════════════
+const STORY_LYRICS = [
+  { time: 0,      text: "🎵  Chapter I — Once Upon a Time  🎵" },
+  { time: 12500,  text: "🎂  Happy Birthday, Nishi!  🎂" },
+  { time: 17500,  text: "✨  Happy Birthday, Nishi!  ✨" },
+  { time: 23500,  text: "Once upon a time, a little spark entered the world" },
+  { time: 28500,  text: "Big eyes, tiny shoes & a smile pure as gold" },
+  { time: 33500,  text: "Even back then, you lit up every room you walked into" },
+  { time: 37500,  text: "Little did we know what a bond would grow between us" },
+
+  { time: 41500,  text: "✨  Growing Up Bright — Growing Into You  ✨" },
+  { time: 50500,  text: "Growing up bright — growing into you 🌸" },
+  { time: 59500,  text: "Seasons turned & you bloomed with every passing year" },
+  { time: 64000,  text: "Carefree laughs, endless selfies & fearless dreams" },
+  { time: 68500,  text: "Through quiet days & wild moments — you kept shining" },
+  { time: 73000,  text: "Unapologetically vibrant, real & one of a kind" },
+  { time: 76800,  text: "Every frame tells the story of your fearless heart" },
+  { time: 80800,  text: "Always glowing, always moving forward with grace" },
+
+  { time: 84500,  text: "💛  Brother, Sister & Best Friends  💛" },
+  { time: 90000,  text: "Family relations drifted apart — miles & silence grew" },
+  { time: 95200,  text: "No big family parties, no crowded celebrations for us" },
+  { time: 100200, text: "Yet somehow, across all that distance — we chose each other" },
+  { time: 105500, text: "Cousins on paper — brother, sister & best friends at heart" },
+  { time: 114800, text: "Through train rides, late talks & silly jokes we kept" },
+  { time: 120500, text: "Proof that real family isn't built by gatherings, but by heart" },
+  { time: 126200, text: "No matter what happens around us — I'm always in your corner" },
+
+  { time: 131600, text: "👑  Today's Birthday Queen!  👑" },
+  { time: 133800, text: "🎉  Happy Birthday, Nishi!  🎉" },
+  { time: 140500, text: "Happy Birthday, Queen! ✨" },
+  { time: 145500, text: "🎂  Happy Birthday, Nishi!  🎂" },
+  { time: 152000, text: "Look at the incredible woman you've grown into today" },
+  { time: 156500, text: "Effortless grace, fearless spirit & an unstoppable heart" },
+  { time: 161800, text: "Whether conquering days or laughing till it hurts" },
+  { time: 167000, text: "You deserve every ounce of joy this world can offer" },
+  { time: 172000, text: "Here's to the memories lived & hundreds more to come" },
+  { time: 177200, text: "Happy Birthday to You — my sister, my best friend" },
+  { time: 182000, text: "May your year shine brighter than fireworks in the night" },
+  { time: 186500, text: "🎂  Make a wish, Nishi — today belongs to you!  🎂" },
+  { time: 190000, text: "🎉  Happy Birthday, Nishi!  🎉" }
+];
+
+// ════════════════════════════════════════════════════════
+//  RICH WEB AUDIO SYNTHESIZED BIRTHDAY SOUNDTRACK
+// ════════════════════════════════════════════════════════
+const SynthMusic = (() => {
+  let ctx = null;
+  let master = null;
+  let analyser = null;
+  let reverb = null;
+  let isMuted = false;
+  let isRunning = false;
+  let schedulerId = null;
+  let nextBeatTime = 0;
+  let step = 0;
+  let useCustomAudio = false;
+
+  // MIDI note to frequency
+  const mtof = (m) => 440 * Math.pow(2, (m - 69) / 12);
+
+  function createImpulseResponse(audioCtx, seconds = 2.1, decay = 2.4) {
+    const rate = audioCtx.sampleRate;
+    const length = Math.floor(rate * seconds);
+    const impulse = audioCtx.createBuffer(2, length, rate);
+    for (let ch = 0; ch < 2; ch++) {
+      const data = impulse.getChannelData(ch);
+      for (let i = 0; i < length; i++) {
+        data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / length, decay);
+      }
+    }
+    return impulse;
+  }
+
+  function init() {
+    if (ctx) return;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    ctx = new AC();
+    master = ctx.createGain();
+    master.gain.value = isMuted ? 0 : 0.72;
+
+    analyser = ctx.createAnalyser();
+    analyser.fftSize = 64;
+
+    const comp = ctx.createDynamicsCompressor();
+    comp.threshold.value = -16;
+    comp.ratio.value = 3;
+
+    reverb = ctx.createConvolver();
+    reverb.buffer = createImpulseResponse(ctx, 2.2, 2.5);
+    const wetGain = ctx.createGain();
+    wetGain.gain.value = 0.28;
+
+    master.connect(comp);
+    master.connect(reverb);
+    reverb.connect(wetGain);
+    wetGain.connect(comp);
+    comp.connect(analyser);
+    analyser.connect(ctx.destination);
+  }
+
+  // Warm felt piano voice
+  function playPiano(midi, time, dur = 0.9, vel = 0.22) {
+    if (!ctx || !midi) return;
+    const freq = mtof(midi);
+    const osc1 = ctx.createOscillator();
+    const osc2 = ctx.createOscillator();
+    const filter = ctx.createBiquadFilter();
+    const env = ctx.createGain();
+
+    osc1.type = 'triangle';
+    osc1.frequency.setValueAtTime(freq, time);
+    osc2.type = 'sine';
+    osc2.frequency.setValueAtTime(freq * 2, time);
+
+    const h2Gain = ctx.createGain();
+    h2Gain.gain.setValueAtTime(0.18, time);
+
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(2200, time);
+    filter.frequency.exponentialRampToValueAtTime(650, time + dur);
+
+    env.gain.setValueAtTime(0.0001, time);
+    env.gain.linearRampToValueAtTime(vel, time + 0.018);
+    env.gain.exponentialRampToValueAtTime(0.0001, time + dur);
+
+    osc1.connect(filter);
+    osc2.connect(h2Gain);
+    h2Gain.connect(filter);
+    filter.connect(env);
+    env.connect(master);
+
+    osc1.start(time); osc2.start(time);
+    osc1.stop(time + dur + 0.05); osc2.stop(time + dur + 0.05);
+  }
+
+  // Warm lush pad chord
+  function playPad(midis, time, dur = 2.6, vel = 0.055) {
+    if (!ctx) return;
+    midis.forEach((m) => {
+      const osc = ctx.createOscillator();
+      const filter = ctx.createBiquadFilter();
+      const env = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(mtof(m), time);
+
+      filter.type = 'lowpass';
+      filter.frequency.value = 950;
+
+      env.gain.setValueAtTime(0.0001, time);
+      env.gain.linearRampToValueAtTime(vel, time + 0.55);
+      env.gain.setValueAtTime(vel * 0.85, time + dur - 0.65);
+      env.gain.exponentialRampToValueAtTime(0.0001, time + dur);
+
+      osc.connect(filter);
+      filter.connect(env);
+      env.connect(master);
+      osc.start(time);
+      osc.stop(time + dur + 0.1);
+    });
+  }
+
+  // Music-box chime sparkle
+  function playBell(midi, time, dur = 1.2, vel = 0.09) {
+    if (!ctx || !midi) return;
+    const osc = ctx.createOscillator();
+    const env = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(mtof(midi), time);
+    env.gain.setValueAtTime(0.0001, time);
+    env.gain.linearRampToValueAtTime(vel, time + 0.008);
+    env.gain.exponentialRampToValueAtTime(0.0001, time + dur);
+    osc.connect(env); env.connect(master);
+    osc.start(time); osc.stop(time + dur + 0.04);
+  }
+
+  // Happy Birthday 3/4 waltz melody (48 eighth-note steps = 8 bars in F Major)
+  const HB_MELODY = [
+    60,60,                         // Hap-py (pickup)
+    62,0,  60,0,  65,0,            // Birth-day to
+    64,0,  0,0,   60,60,           // you, Hap-py
+    62,0,  60,0,  67,0,            // Birth-day to
+    65,0,  0,0,   60,60,           // you, Hap-py
+    72,0,  69,0,  65,0,            // Birth-day dear
+    64,0,  62,0,  70,70,           // Ni-shi, Hap-py
+    69,0,  65,0,  67,0,            // Birth-day to
+    65,0,  0,0,   0,0              // you!
+  ];
+  const HB_CHORDS = {
+    2:  [53, 57, 60],       // F
+    8:  [55, 60, 64],       // C
+    14: [55, 60, 64, 70],   // C7
+    20: [53, 57, 60],       // F
+    26: [53, 57, 60, 65],   // F / F7
+    32: [58, 62, 65],       // Bb
+    38: [53, 57, 60],       // F/C
+    42: [55, 60, 64],       // C7
+    44: [53, 57, 60, 69]    // Fmaj
+  };
+
+  // Uplifting flowing arpeggio & emotional progression for Chapter 2 & 3
+  const PROG_CHORDS = [
+    [53, 57, 60, 64], // Fmaj7
+    [52, 55, 60, 64], // C/E
+    [50, 57, 60, 65], // Dm7
+    [46, 53, 58, 62], // Bbmaj7
+  ];
+  const EMO_MELODY_CH2 = [69, 0, 72, 0, 76, 0, 72, 0, 74, 0, 72, 0, 69, 0, 67, 0];
+  const EMO_MELODY_CH3 = [65, 0, 69, 0, 72, 0, 69, 0, 67, 0, 65, 0, 64, 0, 62, 0];
+
+  function scheduleStep(s, time) {
+    const ch = typeof currentChapterId === 'number' ? currentChapterId : 0;
+
+    if (ch === 0 || ch === 3) {
+      // Chapter 1 (music-box/felt-piano) or Chapter 4 (joyful celebratory Happy Birthday!)
+      const idx = s % HB_MELODY.length;
+      const note = HB_MELODY[idx];
+      if (note) {
+        if (ch === 0) {
+          playBell(note + 12, time, 1.35, 0.085);
+          playPiano(note, time, 1.0, 0.16);
+        } else {
+          playPiano(note, time, 1.05, 0.22);
+          playBell(note + 12, time, 1.1, 0.075);
+        }
+      }
+      if (HB_CHORDS[idx]) {
+        playPad(HB_CHORDS[idx], time, 1.9, ch === 3 ? 0.065 : 0.048);
+        playPiano(HB_CHORDS[idx][0] - 12, time, 1.4, 0.15);
+      }
+      // Subtle celebratory arpeggio in Ch 4
+      if (ch === 3 && idx % 3 === 0 && idx > 1) {
+        const arpBase = idx >= 32 && idx < 38 ? [62, 65, 70] : [65, 69, 72];
+        playBell(arpBase[(idx / 3) % 3] + 12, time, 0.65, 0.036);
+      }
+    } else {
+      // Chapter 2 & 3 emotional flowing bridge
+      const barIdx = Math.floor(s / 16) % PROG_CHORDS.length;
+      const posInBar = s % 16;
+      const chord = PROG_CHORDS[barIdx];
+
+      if (posInBar === 0) {
+        playPad(chord, time, 3.8, ch === 2 ? 0.068 : 0.055);
+        playPiano(chord[0] - 12, time, 2.2, 0.16);
+      }
+      // Rolling arpeggio every 2 steps
+      if (posInBar % 2 === 0) {
+        const arpNote = chord[(posInBar / 2) % chord.length];
+        playPiano(arpNote, time, 0.9, 0.12);
+      }
+      const mel = ch === 1 ? EMO_MELODY_CH2 : EMO_MELODY_CH3;
+      const mNote = mel[posInBar];
+      if (mNote) {
+        playPiano(mNote, time, 1.25, ch === 2 ? 0.19 : 0.16);
+        if (ch === 1) playBell(mNote + 12, time, 0.9, 0.04);
+      }
+    }
+  }
+
+  function tick() {
+    if (!ctx || !isRunning || useCustomAudio) return;
+    const stepLen = (typeof currentChapterId === 'number' && (currentChapterId === 0 || currentChapterId === 3))
+      ? 0.24 : 0.26;
+    while (nextBeatTime < ctx.currentTime + 0.28) {
+      scheduleStep(step, nextBeatTime);
+      nextBeatTime += stepLen;
+      step++;
+    }
+  }
+
+  function start() {
+    init();
+    if (!ctx) return;
+    if (ctx.state === 'suspended') ctx.resume();
+    if (useCustomAudio) return;
+    if (!isRunning) {
+      isRunning = true;
+      nextBeatTime = ctx.currentTime + 0.08;
+      schedulerId = setInterval(tick, 90);
+    }
+  }
+
+  function pause() {
+    isRunning = false;
+    if (schedulerId) { clearInterval(schedulerId); schedulerId = null; }
+  }
+
+  function reset() {
+    step = 0;
+    if (ctx) nextBeatTime = ctx.currentTime + 0.08;
+  }
+
+  function setMuted(m) {
+    isMuted = m;
+    if (master && ctx) {
+      master.gain.setTargetAtTime(m ? 0 : 0.72, ctx.currentTime, 0.05);
+    }
+  }
+
+  function playSparkleFlourish() {
+    init();
+    if (!ctx) return;
+    if (ctx.state === 'suspended') ctx.resume();
+    const notes = [65, 69, 72, 77, 81, 84, 89];
+    const now = ctx.currentTime + 0.02;
+    notes.forEach((n, i) => {
+      playBell(n, now + i * 0.075, 1.9, 0.12);
+    });
+    playPad([53, 57, 60, 64, 67], now, 3.4, 0.075);
+  }
+
+  function getLevelBars() {
+    if (!analyser || isMuted || (!isRunning && !useCustomAudio)) return [0.15, 0.25, 0.18, 0.22];
+    const data = new Uint8Array(analyser.frequencyBinCount);
+    analyser.getByteFrequencyData(data);
+    return [
+      Math.max(0.18, data[1] / 255),
+      Math.max(0.18, data[3] / 255),
+      Math.max(0.18, data[5] / 255),
+      Math.max(0.18, data[8] / 255)
+    ];
+  }
+
+  return {
+    start, pause, reset, setMuted, playSparkleFlourish, getLevelBars,
+    setCustomMode(flag) { useCustomAudio = flag; if (flag) pause(); },
+    isCustomMode() { return useCustomAudio; }
+  };
+})();
+
+// Primary MP3 audio clock
+const bgAudioEl = document.getElementById('bg-audio');
+let useAudioClock = true;
+let audioFailed = false;
+let stageInitialized = false;
+
+bgAudioEl.addEventListener('error', () => {
+  audioFailed = true;
+  useAudioClock = false;
+});
+
+bgAudioEl.addEventListener('playing', () => {
+  clearTimeout(slideTimer);
+});
+
+// ════════════════════════════════════════════════════════
+//  DYNAMIC MOBILE-SAFE LAYOUT METRICS
+// ════════════════════════════════════════════════════════
+function syncStageMetrics() {
+  const hud = document.getElementById('hud');
+  const vh = (window.visualViewport ? window.visualViewport.height : window.innerHeight) || 700;
+  const hudBottom = hud && hud.offsetHeight ? Math.ceil(hud.getBoundingClientRect().bottom + 8) : 114;
+  document.documentElement.style.setProperty('--hud-h', hudBottom + 'px');
+
+  const activeBottom = document.querySelector('.slide.active .photo-bottom');
+  const botH = activeBottom ? Math.ceil(activeBottom.offsetHeight) : 74;
+  const maxSlotH = Math.max(150, Math.floor(vh - hudBottom - botH - 22));
+  document.documentElement.style.setProperty('--slot-max-h', maxSlotH + 'px');
+}
+
+window.addEventListener('resize', syncStageMetrics);
+window.addEventListener('orientationchange', () => setTimeout(syncStageMetrics, 160));
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', syncStageMetrics);
+}
+if (typeof ResizeObserver !== 'undefined') {
+  const hudEl = document.getElementById('hud');
+  if (hudEl) new ResizeObserver(syncStageMetrics).observe(hudEl);
+}
+
+// ════════════════════════════════════════════════════════
+//  SLIDESHOW ENGINE (MASTER-LOCKED TO MP3 CLOCK)
+// ════════════════════════════════════════════════════════
+let currentIndex = 0;
+let currentChapterId = 0;
+let isPaused = false;
+let isMuted = false;
+let slideTimer = null;
+let elapsedTimer = null;
+let slideStartPerf = 0;
+let pausedWithinSlideMs = 0;
+const preloadedSet = new Set();
+
+function preloadAround(idx) {
+  for (let i = idx; i < Math.min(TIMELINE.length, idx + 7); i++) {
+    const item = TIMELINE[i];
+    if (item.type === 'photo' && !preloadedSet.has(item.file)) {
+      preloadedSet.add(item.file);
+      const img = new Image();
+      img.src = item.file;
+    }
+  }
+}
+
+function buildPills() {
+  const wrap = document.getElementById('chapter-pills');
+  wrap.innerHTML = '';
+  CHAPTERS.forEach((ch) => {
+    const btn = document.createElement('button');
+    btn.className = 'ch-pill' + (ch.id === 0 ? ' active' : '');
+    btn.textContent = ch.pill;
+    btn.dataset.ch = ch.id;
+    btn.onclick = () => jumpToChapter(ch.id);
+    wrap.appendChild(btn);
+  });
+}
+
+function buildSlides() {
+  const container = document.getElementById('slides-container');
+  container.innerHTML = '';
+
+  TIMELINE.forEach((item, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'slide';
+    slide.id = `slide-${i}`;
+    slide.style.setProperty('--hold-dur', item.dur + 'ms');
+
+    if (item.type === 'chapter') {
+      slide.innerHTML = `
+        <div class="chapter-card">
+          <div class="ch-num">${item.num}</div>
+          <div class="ch-title">${item.title}</div>
+          <div class="ch-desc">${item.desc}</div>
+        </div>`;
+    } else {
+      const lazyAttr = i < 8 ? 'eager' : 'lazy';
+      slide.innerHTML = `
+        <div class="photo-wrap">
+          <img class="photo-bg" src="${item.file}" alt="" aria-hidden="true" loading="${lazyAttr}">
+          <div class="photo-overlay"></div>
+          <div class="photo-slot">
+            <div class="photo-frame ${item.kbClass}">
+              <img class="photo-main" src="${item.file}" alt="Nishi" loading="${lazyAttr}">
+            </div>
+          </div>
+          <div class="photo-bottom">
+            <div class="photo-caption">${item.caption}</div>
+            <div class="slide-meta">
+              <span class="slide-spotlight-tag">${item.spotlight ? '✨ Special Memory' : CHAPTERS[item.chapterId].num}</span>
+              <span>${item.photoIdx} / ${TOTAL_PHOTOS}</span>
+            </div>
+          </div>
+        </div>`;
+    }
+    container.appendChild(slide);
+  });
+}
+
+function ensureSlidesBuilt() {
+  if (stageInitialized) return;
+  stageInitialized = true;
+  buildPills();
+  buildSlides();
+  startTickLoop();
+  spawnPetals();
+}
+
+let lastLyricIdx = -1;
+let lyricSwapTimer = null;
+function updateLyrics(timeMs) {
+  const el = document.getElementById('lyric-display');
+  if (!el) return;
+  let idx = -1;
+  for (let i = 0; i < STORY_LYRICS.length; i++) {
+    if (STORY_LYRICS[i].time <= timeMs) idx = i;
+    else break;
+  }
+  if (idx !== lastLyricIdx) {
+    lastLyricIdx = idx;
+    clearTimeout(lyricSwapTimer);
+    if (idx >= 0 && STORY_LYRICS[idx].text) {
+      el.classList.remove('active');
+      lyricSwapTimer = setTimeout(() => {
+        if (lastLyricIdx >= 0 && STORY_LYRICS[lastLyricIdx]) {
+          el.textContent = STORY_LYRICS[lastLyricIdx].text;
+          el.classList.add('active');
+          requestAnimationFrame(syncStageMetrics);
+        }
+      }, 140);
+    } else {
+      el.classList.remove('active');
+    }
+  }
+}
+
+function setChapterMood(chId) {
+  currentChapterId = chId;
+  const ch = CHAPTERS[chId];
+  document.documentElement.style.setProperty('--bg-a', ch.bgA);
+  document.documentElement.style.setProperty('--bg-b', ch.bgB);
+  document.querySelectorAll('.ch-pill').forEach((p) => {
+    p.classList.toggle('active', Number(p.dataset.ch) === chId);
+  });
+}
+
+function seekAudioTo(ms) {
+  if (!bgAudioEl || audioFailed) return;
+  try {
+    seekGraceUntil = performance.now() + 350;
+    const targetSec = Math.max(0, ms / 1000);
+    if (Number.isFinite(bgAudioEl.duration) && targetSec < bgAudioEl.duration) {
+      bgAudioEl.currentTime = targetSec;
+    } else if (bgAudioEl.readyState >= 1) {
+      bgAudioEl.currentTime = targetSec;
+    }
+  } catch (_) {}
+}
+
+let seekGraceUntil = 0;
+function showItem(idx, seekAudio = false) {
+  if (idx >= TIMELINE.length) {
+    finishSlideshow();
+    return;
+  }
+  if (idx < 0) idx = 0;
+
+  clearTimeout(slideTimer);
+  currentIndex = idx;
+  const item = TIMELINE[idx];
+
+  preloadAround(idx);
+  setChapterMood(item.chapterId);
+
+  if (seekAudio && useAudioClock && !audioFailed) {
+    seekAudioTo(item.startMs);
+    if (!isPaused && bgAudioEl.paused) {
+      bgAudioEl.play().catch(() => {});
+    }
+  }
+
+  document.querySelectorAll('.slide').forEach((s, i) => {
+    if (i === idx) {
+      const frame = s.querySelector('.photo-frame');
+      if (frame) {
+        frame.style.animation = 'none';
+        void frame.offsetWidth;
+        frame.style.animation = '';
+      }
+      s.classList.add('active');
+    } else {
+      s.classList.remove('active');
+    }
+  });
+
+  pausedWithinSlideMs = 0;
+  slideStartPerf = performance.now();
+  updateLyrics(item.startMs);
+  requestAnimationFrame(syncStageMetrics);
+
+  // Fallback timer only if MP3 isn't driving the clock
+  if (!isPaused && (audioFailed || bgAudioEl.paused)) {
+    slideTimer = setTimeout(() => showItem(currentIndex + 1, false), item.dur);
+  }
+}
+
+function startTickLoop() {
+  if (elapsedTimer) clearInterval(elapsedTimer);
+  elapsedTimer = setInterval(() => {
+    // Animate EQ bars dynamically when MP3 or fallback synth is playing
+    const bars = document.querySelectorAll('.eq-bar');
+    const audioPlaying = bgAudioEl && !bgAudioEl.paused && !isMuted && !audioFailed;
+    const levels = SynthMusic.getLevelBars();
+    const tNow = performance.now() / 160;
+    bars.forEach((b, i) => {
+      const pct = audioPlaying
+        ? (0.28 + 0.55 * Math.abs(Math.sin(tNow + i * 1.15)) + Math.random() * 0.16)
+        : levels[i % levels.length];
+      b.style.height = Math.round(3 + pct * 12) + 'px';
+    });
+
+    if (isPaused || !document.getElementById('slideshow').classList.contains('active')) return;
+
+    let totalNowMs;
+    if (useAudioClock && !audioFailed && !bgAudioEl.paused && !bgAudioEl.seeking && performance.now() >= seekGraceUntil) {
+      totalNowMs = bgAudioEl.currentTime * 1000;
+      if (totalNowMs >= TOTAL_DURATION_MS) {
+        finishSlideshow();
+        return;
+      }
+      // Keep currentIndex locked to exact audio timestamp
+      let targetIdx = 0;
+      while (targetIdx + 1 < TIMELINE.length && TIMELINE[targetIdx + 1].startMs <= totalNowMs) {
+        targetIdx++;
+      }
+      if (targetIdx !== currentIndex) {
+        showItem(targetIdx, false);
+      }
+    } else {
+      const item = TIMELINE[currentIndex];
+      if (!item) return;
+      const nowOffset = Math.min(item.dur, performance.now() - slideStartPerf);
+      totalNowMs = item.startMs + nowOffset;
+    }
+
+    updateLyrics(totalNowMs);
+    const bar = document.getElementById('progress-bar');
+    bar.style.width = Math.min(100, (totalNowMs / TOTAL_DURATION_MS) * 100).toFixed(2) + '%';
+  }, 60);
+}
+
+bgAudioEl.addEventListener('ended', () => {
+  if (document.getElementById('slideshow').classList.contains('active')) {
+    finishSlideshow();
+  }
+});
+
+function nextSlide() {
+  if (currentIndex < TIMELINE.length - 1) showItem(currentIndex + 1, true);
+  else finishSlideshow();
+}
+
+function prevSlide() {
+  if (currentIndex > 0) showItem(currentIndex - 1, true);
+}
+
+function jumpToChapter(chId) {
+  const target = CHAPTER_START_INDEX[chId];
+  if (typeof target === 'number') {
+    showItem(target, true);
+    showToast(CHAPTERS[chId].num + ': ' + CHAPTERS[chId].title);
+  }
+}
+
+function togglePause() {
+  isPaused = !isPaused;
+  document.getElementById('btn-pause').textContent = isPaused ? '▶' : '⏸';
+  const item = TIMELINE[currentIndex];
+  if (isPaused) {
+    clearTimeout(slideTimer);
+    if (item) pausedWithinSlideMs = Math.min(item.dur, performance.now() - slideStartPerf);
+    if (!audioFailed) bgAudioEl.pause();
+    SynthMusic.pause();
+    showToast('⏸ Paused');
+  } else {
+    if (!audioFailed && useAudioClock) {
+      bgAudioEl.play().catch(() => {
+        const remaining = item ? Math.max(400, item.dur - pausedWithinSlideMs) : 1500;
+        slideStartPerf = performance.now() - pausedWithinSlideMs;
+        slideTimer = setTimeout(() => showItem(currentIndex + 1, false), remaining);
+      });
+    } else {
+      const remaining = item ? Math.max(400, item.dur - pausedWithinSlideMs) : 1500;
+      slideStartPerf = performance.now() - pausedWithinSlideMs;
+      slideTimer = setTimeout(() => showItem(currentIndex + 1, false), remaining);
+      if (!isMuted) SynthMusic.start();
+    }
+    showToast('▶ Playing');
+  }
+}
+
+function toggleMute() {
+  isMuted = !isMuted;
+  document.getElementById('btn-mute').textContent = isMuted ? '🔇' : '🔊';
+  bgAudioEl.muted = isMuted;
+  SynthMusic.setMuted(isMuted);
+  showToast(isMuted ? '🔇 Sound Muted' : '🔊 Sound On');
+}
+
+let toastTimeout = null;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => t.classList.remove('show'), 1200);
+}
+
+function startShow() {
+  document.getElementById('intro').classList.add('fade-out');
+  ensureSlidesBuilt();
+  preloadAround(0);
+
+  // Start MP3 synchronously within tap gesture so mobile & desktop stay locked to 0.0s
+  if (!audioFailed) {
+    bgAudioEl.currentTime = 0;
+    bgAudioEl.play().catch(() => {
+      // Fallback to built-in synth if browser blocks or audio file fails
+      useAudioClock = false;
+      SynthMusic.reset();
+      SynthMusic.start();
+    });
+  } else {
+    useAudioClock = false;
+    SynthMusic.reset();
+    SynthMusic.start();
+  }
+
+  document.getElementById('slideshow').classList.add('active');
+  document.getElementById('hud').classList.add('visible');
+  document.getElementById('progress-bar-wrap').style.display = 'block';
+  showItem(0, false);
+  requestAnimationFrame(syncStageMetrics);
+
+  setTimeout(() => {
+    document.getElementById('intro').style.display = 'none';
+    syncStageMetrics();
+  }, 880);
+}
+
+function finishSlideshow() {
+  clearTimeout(slideTimer);
+  document.getElementById('slideshow').classList.remove('active');
+  document.getElementById('hud').classList.remove('visible');
+  document.getElementById('progress-bar-wrap').style.display = 'none';
+  document.getElementById('cake-screen').classList.add('active');
+  document.getElementById('cake-stage').classList.remove('blown');
+  document.getElementById('blow-btn').style.display = 'inline-block';
+}
+
+let candlesBlown = false;
+function blowCandles() {
+  if (candlesBlown) return;
+  candlesBlown = true;
+  document.getElementById('cake-stage').classList.add('blown');
+  document.getElementById('blow-btn').style.display = 'none';
+  if (!isMuted) SynthMusic.playSparkleFlourish();
+  launchConfettiBurst();
+
+  setTimeout(() => {
+    document.getElementById('cake-screen').classList.remove('active');
+    document.getElementById('final-screen').classList.add('active');
+  }, 1500);
+}
+
+function relightCake() {
+  candlesBlown = false;
+  document.getElementById('final-screen').classList.remove('active');
+  document.getElementById('cake-stage').classList.remove('blown');
+  document.getElementById('blow-btn').style.display = 'inline-block';
+  document.getElementById('cake-screen').classList.add('active');
+}
+
+function replay() {
+  candlesBlown = false;
+  isPaused = false;
+  lastLyricIdx = -1;
+  document.getElementById('btn-pause').textContent = '⏸';
+  document.getElementById('final-screen').classList.remove('active');
+  document.getElementById('cake-screen').classList.remove('active');
+  document.getElementById('slideshow').classList.add('active');
+  document.getElementById('hud').classList.add('visible');
+  document.getElementById('progress-bar-wrap').style.display = 'block';
+
+  if (!audioFailed && useAudioClock) {
+    bgAudioEl.currentTime = 0;
+    bgAudioEl.play().catch(() => {});
+  } else {
+    SynthMusic.reset();
+    if (!isMuted) SynthMusic.start();
+  }
+  showItem(0, false);
+}
+
+// ════════════════════════════════════════════════════════
+//  ALL 84 MEMORIES GALLERY MODAL
+// ════════════════════════════════════════════════════════
+function openGallery() {
+  if (!isPaused && document.getElementById('slideshow').classList.contains('active')) {
+    togglePause();
+  }
+  const grid = document.getElementById('gallery-grid');
+  if (!grid.children.length) {
+    TIMELINE.forEach((item, tlIdx) => {
+      if (item.type !== 'photo') return;
+      const card = document.createElement('div');
+      card.className = 'gal-item';
+      card.innerHTML = `<img src="${item.file}" loading="lazy" alt="Nishi"><div class="gal-cap">${item.photoIdx}. ${item.caption}</div>`;
+      card.onclick = () => {
+        closeGallery();
+        ensureSlidesBuilt();
+        document.getElementById('intro').style.display = 'none';
+        document.getElementById('final-screen').classList.remove('active');
+        document.getElementById('cake-screen').classList.remove('active');
+        document.getElementById('slideshow').classList.add('active');
+        document.getElementById('hud').classList.add('visible');
+        document.getElementById('progress-bar-wrap').style.display = 'block';
+        if (isPaused) togglePause();
+        showItem(tlIdx, true);
+        requestAnimationFrame(syncStageMetrics);
+      };
+      grid.appendChild(card);
+    });
+  }
+  document.getElementById('gallery-modal').classList.add('open');
+}
+
+function closeGallery() {
+  document.getElementById('gallery-modal').classList.remove('open');
+}
+
+// ════════════════════════════════════════════════════════
+//  TOUCH GESTURES & KEYBOARD NAVIGATION
+// ════════════════════════════════════════════════════════
+let touchX = 0, touchY = 0, lastTouchEnd = 0;
+const slideshowEl = document.getElementById('slideshow');
+
+slideshowEl.addEventListener('touchstart', (e) => {
+  touchX = e.changedTouches[0].clientX;
+  touchY = e.changedTouches[0].clientY;
+}, { passive: true });
+
+slideshowEl.addEventListener('touchend', (e) => {
+  lastTouchEnd = performance.now();
+  const dx = e.changedTouches[0].clientX - touchX;
+  const dy = e.changedTouches[0].clientY - touchY;
+  if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+    if (dx < 0) nextSlide();
+    else prevSlide();
+  } else if (Math.abs(dx) < 15 && Math.abs(dy) < 15) {
+    const w = window.innerWidth;
+    if (touchX < w * 0.28) prevSlide();
+    else if (touchX > w * 0.72) nextSlide();
+    else togglePause();
+  }
+}, { passive: true });
+
+slideshowEl.addEventListener('click', (e) => {
+  if (performance.now() - lastTouchEnd < 500) return;
+  const w = window.innerWidth;
+  if (e.clientX < w * 0.28) prevSlide();
+  else if (e.clientX > w * 0.72) nextSlide();
+  else togglePause();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (document.getElementById('gallery-modal').classList.contains('open')) {
+    if (e.key === 'Escape') closeGallery();
+    return;
+  }
+  if (!document.getElementById('slideshow').classList.contains('active')) return;
+  if (e.key === 'ArrowRight') nextSlide();
+  else if (e.key === 'ArrowLeft') prevSlide();
+  else if (e.key === ' ' || e.key === 'p' || e.key === 'P') { e.preventDefault(); togglePause(); }
+  else if (e.key === 'm' || e.key === 'M') toggleMute();
+  else if (['1','2','3','4'].includes(e.key)) jumpToChapter(Number(e.key) - 1);
+});
+
+// ════════════════════════════════════════════════════════
+//  STARFIELD & SPARKLE CANVAS
+// ════════════════════════════════════════════════════════
+(function () {
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, stars = [], sparkles = [];
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  for (let i = 0; i < 130; i++) {
+    stars.push({
+      x: Math.random() * W, y: Math.random() * H,
+      r: Math.random() * 1.4 + .3, a: Math.random(),
+      da: (Math.random() - .5) * .012,
+      c: ['#f5c842', '#f28bbf', '#ce93d8', '#ffffff'][Math.floor(Math.random() * 4)]
+    });
+  }
+
+  setInterval(() => {
+    for (let i = 0; i < 2; i++) {
+      sparkles.push({
+        x: Math.random() * W, y: Math.random() * H,
+        r: Math.random() * 2.4 + .9, life: 1,
+        vx: (Math.random() - .5) * .65, vy: -Math.random() * 1.05 - .25,
+        c: ['#f5c842', '#f28bbf', '#ce93d8', '#ffffff', '#ffb347'][Math.floor(Math.random() * 5)]
+      });
+    }
+  }, 150);
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    stars.forEach((s) => {
+      s.a += s.da;
+      if (s.a > 1 || s.a < 0) s.da *= -1;
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, s.a);
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = s.c;
+      ctx.shadowBlur = 5;
+      ctx.shadowColor = s.c;
+      ctx.fill();
+      ctx.restore();
+    });
+
+    sparkles = sparkles.filter((sp) => sp.life > 0);
+    sparkles.forEach((sp) => {
+      sp.x += sp.vx; sp.y += sp.vy; sp.life -= .014;
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, sp.life);
+      ctx.translate(sp.x, sp.y);
+      ctx.beginPath();
+      for (let i = 0; i < 4; i++) {
+        ctx.lineTo(sp.r * Math.cos(i * Math.PI / 2), sp.r * Math.sin(i * Math.PI / 2));
+        ctx.lineTo(sp.r * .38 * Math.cos(i * Math.PI / 2 + Math.PI / 4), sp.r * .38 * Math.sin(i * Math.PI / 2 + Math.PI / 4));
+      }
+      ctx.closePath();
+      ctx.fillStyle = sp.c;
+      ctx.shadowBlur = 7;
+      ctx.shadowColor = sp.c;
+      ctx.fill();
+      ctx.restore();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ════════════════════════════════════════════════════════
+//  PETALS & CELEBRATION CONFETTI
+// ════════════════════════════════════════════════════════
+let petalsStarted = false;
+const PETALS = ['🌸', '🌼', '✨', '🌺', '💫', '⭐', '🌟', '💛', '🌷'];
+
+function spawnPetals() {
+  if (petalsStarted) return;
+  petalsStarted = true;
+  for (let i = 0; i < 10; i++) setTimeout(createPetal, i * 420);
+  setInterval(createPetal, 1500);
+}
+
+function createPetal() {
+  const el = document.createElement('div');
+  el.className = 'petal';
+  el.textContent = PETALS[Math.floor(Math.random() * PETALS.length)];
+  el.style.left = Math.random() * 100 + 'vw';
+  el.style.top = '-6vh';
+  el.style.fontSize = (Math.random() * 1.15 + .65) + 'rem';
+  el.style.opacity = Math.random() * .45 + .25;
+  const dur = Math.random() * 7 + 7;
+  el.style.animationDuration = dur + 's';
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), dur * 1000);
+}
+
+function launchConfettiBurst() {
+  const em = ['🎊', '🎉', '✨', '🌸', '💛', '🌟', '🎂', '💖', '🎈', '🎆'];
+  for (let i = 0; i < 55; i++) {
+    setTimeout(() => {
+      const el = document.createElement('div');
+      el.style.cssText = `position:fixed;z-index:200;pointer-events:none;
+        font-size:${Math.random() * 1.7 + .95}rem;left:${Math.random() * 100}vw;top:-5vh;
+        animation:fall ${Math.random() * 4.5 + 3.5}s linear forwards;`;
+      el.textContent = em[Math.floor(Math.random() * em.length)];
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 8200);
+    }, i * 55);
+  }
+}
+</script>
+</body>
+</html>
