@@ -9,9 +9,10 @@
 
 <!-- WhatsApp & Social Link Preview -->
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://dhvanits20.github.io/nishi-birthday/">
 <meta property="og:title" content="Happy Birthday Nishi! 🎂✨">
 <meta property="og:description" content="4 Chapters, 84 Memories — Cousins by relation, Brother, Sister & Best Friends by heart. Tap to play with music!">
-<meta property="og:image" content="WhatsApp Image 2026-11-27 at 12.27.45 AM (2).jpeg">
+<meta property="og:image" content="https://dhvanits20.github.io/nishi-birthday/WhatsApp%20Image%202026-11-27%20at%2012.27.45%20AM%20%282%29.jpeg">
 
 <title>Happy Birthday Nishi 🎂✨</title>
 <style>
@@ -291,9 +292,8 @@
     opacity: 0;
     transition: opacity .55s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
-    will-change: opacity;
   }
-  .slide.active { opacity: 1; pointer-events: all; }
+  .slide.active { opacity: 1; pointer-events: all; will-change: opacity; }
 
   /* Chapter Interstitial Card */
   .chapter-card {
@@ -375,8 +375,8 @@
     padding: 3.5px;
     background: linear-gradient(135deg, rgba(245,200,66,.48), rgba(242,139,191,.3), rgba(245,200,66,.2));
     box-shadow: 0 16px 46px rgba(0,0,0,.68), 0 0 26px rgba(245,200,66,.18);
-    will-change: transform;
   }
+  .slide.active .photo-frame { will-change: transform; }
   .photo-main {
     display: block;
     max-width: calc(92vw - 16px);
@@ -1450,16 +1450,46 @@ let slideTimer = null;
 let elapsedTimer = null;
 let slideStartPerf = 0;
 let pausedWithinSlideMs = 0;
-const preloadedSet = new Set();
+const preloadedMap = new Map();
 
 function preloadAround(idx) {
-  for (let i = idx; i < Math.min(TIMELINE.length, idx + 7); i++) {
-    const item = TIMELINE[i];
-    if (item.type === 'photo' && !preloadedSet.has(item.file)) {
-      preloadedSet.add(item.file);
-      const img = new Image();
-      img.src = item.file;
+  const winStart = Math.max(0, idx - 1);
+  const winEnd = Math.min(TIMELINE.length - 1, idx + 4);
+
+  // Hydrate only the active + nearby slides so mobile never decodes 168 images at once
+  for (let i = 0; i < TIMELINE.length; i++) {
+    const slideEl = document.getElementById(`slide-${i}`);
+    if (!slideEl) continue;
+    const imgs = slideEl.querySelectorAll('img[data-src]');
+    if (!imgs.length) continue;
+
+    if (i >= winStart && i <= winEnd) {
+      imgs.forEach((img) => {
+        const srcUrl = img.getAttribute('data-src');
+        if (img.getAttribute('src') !== srcUrl) {
+          img.setAttribute('src', srcUrl);
+        }
+      });
+    } else if (i < idx - 2 || i > idx + 5) {
+      imgs.forEach((img) => {
+        if (img.hasAttribute('src')) img.removeAttribute('src');
+      });
     }
+  }
+
+  // Keep a small JS Image cache for upcoming 4 photos
+  for (let i = idx; i <= winEnd; i++) {
+    const item = TIMELINE[i];
+    if (item && item.type === 'photo' && !preloadedMap.has(item.file)) {
+      const img = new Image();
+      img.decoding = 'async';
+      img.src = encodeURI(item.file);
+      preloadedMap.set(item.file, img);
+    }
+  }
+  if (preloadedMap.size > 14) {
+    const firstKey = preloadedMap.keys().next().value;
+    preloadedMap.delete(firstKey);
   }
 }
 
@@ -1494,14 +1524,14 @@ function buildSlides() {
           <div class="ch-desc">${item.desc}</div>
         </div>`;
     } else {
-      const lazyAttr = i < 8 ? 'eager' : 'lazy';
+      const safeSrc = encodeURI(item.file);
       slide.innerHTML = `
         <div class="photo-wrap">
-          <img class="photo-bg" src="${item.file}" alt="" aria-hidden="true" loading="${lazyAttr}">
+          <img class="photo-bg" data-src="${safeSrc}" alt="" aria-hidden="true" decoding="async">
           <div class="photo-overlay"></div>
           <div class="photo-slot">
             <div class="photo-frame ${item.kbClass}">
-              <img class="photo-main" src="${item.file}" alt="Nishi" loading="${lazyAttr}">
+              <img class="photo-main" data-src="${safeSrc}" alt="Nishi" decoding="async">
             </div>
           </div>
           <div class="photo-bottom">
@@ -1835,7 +1865,7 @@ function openGallery() {
       if (item.type !== 'photo') return;
       const card = document.createElement('div');
       card.className = 'gal-item';
-      card.innerHTML = `<img src="${item.file}" loading="lazy" alt="Nishi"><div class="gal-cap">${item.photoIdx}. ${item.caption}</div>`;
+      card.innerHTML = `<img src="${encodeURI(item.file)}" loading="lazy" decoding="async" alt="Nishi"><div class="gal-cap">${item.photoIdx}. ${item.caption}</div>`;
       card.onclick = () => {
         closeGallery();
         ensureSlidesBuilt();
@@ -1943,22 +1973,20 @@ document.addEventListener('keydown', (e) => {
 
   function draw() {
     ctx.clearRect(0, 0, W, H);
-    stars.forEach((s) => {
+    for (let k = 0; k < stars.length; k++) {
+      const s = stars[k];
       s.a += s.da;
       if (s.a > 1 || s.a < 0) s.da *= -1;
-      ctx.save();
       ctx.globalAlpha = Math.max(0, s.a);
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
       ctx.fillStyle = s.c;
-      ctx.shadowBlur = 5;
-      ctx.shadowColor = s.c;
       ctx.fill();
-      ctx.restore();
-    });
+    }
 
     sparkles = sparkles.filter((sp) => sp.life > 0);
-    sparkles.forEach((sp) => {
+    for (let k = 0; k < sparkles.length; k++) {
+      const sp = sparkles[k];
       sp.x += sp.vx; sp.y += sp.vy; sp.life -= .014;
       ctx.save();
       ctx.globalAlpha = Math.max(0, sp.life);
@@ -1970,11 +1998,10 @@ document.addEventListener('keydown', (e) => {
       }
       ctx.closePath();
       ctx.fillStyle = sp.c;
-      ctx.shadowBlur = 7;
-      ctx.shadowColor = sp.c;
       ctx.fill();
       ctx.restore();
-    });
+    }
+    ctx.globalAlpha = 1;
     requestAnimationFrame(draw);
   }
   draw();
