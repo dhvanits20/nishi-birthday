@@ -737,8 +737,24 @@
   .lb-top {
     width: 100%; max-width: 720px;
     display: flex; justify-content: space-between; align-items: center;
-    flex-shrink: 0;
+    flex-shrink: 0; gap: .5rem;
   }
+  .lb-actions {
+    display: flex; align-items: center; gap: .5rem;
+  }
+  .lb-dl-btn {
+    display: inline-flex; align-items: center; gap: .32rem;
+    padding: .38rem .85rem;
+    border-radius: 50px;
+    border: 1px solid rgba(245,200,66,.55);
+    background: rgba(245,200,66,.16);
+    color: var(--champagne);
+    font-size: .78rem; font-weight: 500;
+    text-decoration: none; cursor: pointer;
+    transition: transform .15s, background .2s;
+  }
+  .lb-dl-btn:active { transform: scale(0.95); }
+  .lb-dl-btn:hover { background: rgba(245,200,66,.28); }
   .lb-counter {
     font-size: .82rem; color: var(--gold); letter-spacing: .08em; font-weight: 500;
   }
@@ -943,7 +959,10 @@
 <div id="photo-lightbox">
   <div class="lb-top">
     <span class="lb-counter" id="lb-counter"></span>
-    <button class="gallery-close" onclick="closeLightbox()">✕</button>
+    <div class="lb-actions">
+      <a class="lb-dl-btn" id="lb-download" href="#" download onclick="downloadCurrentPhoto(event)">⬇ Save Photo</a>
+      <button class="gallery-close" onclick="closeLightbox()">✕</button>
+    </div>
   </div>
   <div class="lb-stage" id="lb-stage">
     <button class="lb-nav lb-prev" onclick="stepLightbox(-1)" aria-label="Previous photo">‹</button>
@@ -1929,11 +1948,44 @@ let lightboxIdx = 0;
 function openLightbox(photoArrIdx) {
   lightboxIdx = (photoArrIdx + GALLERY_PHOTOS.length) % GALLERY_PHOTOS.length;
   const item = GALLERY_PHOTOS[lightboxIdx];
+  const safeUrl = encodeURI(item.file);
   const img = document.getElementById('lb-img');
-  img.src = encodeURI(item.file);
+  img.src = safeUrl;
+  const dlBtn = document.getElementById('lb-download');
+  if (dlBtn) {
+    dlBtn.href = safeUrl;
+    dlBtn.download = `Nishi-Memory-${String(item.photoIdx).padStart(2, '0')}.jpeg`;
+  }
   document.getElementById('lb-caption').textContent = item.caption;
   document.getElementById('lb-counter').textContent = `${CHAPTERS[item.chapterId].num} • ${item.photoIdx} / ${TOTAL_PHOTOS}`;
   document.getElementById('photo-lightbox').classList.add('open');
+}
+
+async function downloadCurrentPhoto(e) {
+  e.preventDefault();
+  const item = GALLERY_PHOTOS[lightboxIdx];
+  if (!item) return;
+  const url = encodeURI(item.file);
+  const filename = `Nishi-Memory-${String(item.photoIdx).padStart(2, '0')}.jpeg`;
+  try {
+    const res = await fetch(url);
+    const blob = await res.blob();
+    const blobUrl = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = blobUrl;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(blobUrl), 2500);
+  } catch (_) {
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
 }
 
 function stepLightbox(delta) {
